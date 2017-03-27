@@ -9,3 +9,11 @@ body {
 .leftButton {
 	width: 150px;
 }
+
+.hiddenRow {
+    padding: 0 !important;
+}
+
+.idCol {
+    width: 50px;
+}
