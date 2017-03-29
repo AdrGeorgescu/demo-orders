@@ -37,3 +37,22 @@ body {
     border-top: 0;
     border-bottom: 0;
 }
+
+.ordersContainer {
+    background-color: #dff0d8;
+    padding: 10px;
+    margin: 4px 0;
+}
+
+.vouchersContainer {
+    background-color: #dff0d8;
+    padding: 10px;
+    margin: 4px 0;
+}
+
+.order {
+    background-color: #bce8f1;
+    padding: 5px;
+    margin: 5px;
+}
+

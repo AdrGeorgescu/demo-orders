@@ -4,9 +4,9 @@ import {ClientDetails} from './components/ClientDetails';
 import {Orders} from './components/Orders';
 import {NewClient} from './components/NewClient';
 import {Vouchers} from './components/Vouchers';
+import config from '../config';
 
-const endpointUrl = 'http://192.168.1.15:8080';
-const clientsEnpoint = endpointUrl + '/clients';
+const clientsEnpoint = config.baseUrl + '/clients';
 const clientByPhoneEnpoint = clientsEnpoint + "?phone=";
 
 export default class App extends React.Component {
@@ -65,7 +65,12 @@ export default class App extends React.Component {
         };
 
         const clientId = this.refs.filter.value;
-
+        
+        if (!clientId) {
+            this.getClients();
+            return;
+        }
+        
         fetch(clientsEnpoint + "/" + clientId, headers)
             .then((clients) => {
                 clients.json().then(client => {
@@ -87,6 +92,11 @@ export default class App extends React.Component {
         };
 
         const clientPhone = this.refs.filter.value;
+        
+        if (!clientPhone) {
+            this.getClients();
+            return;
+        }
 
         fetch(clientByPhoneEnpoint + clientPhone, headers)
             .then((clients) => {
@@ -106,8 +116,7 @@ export default class App extends React.Component {
 
         return (
             <div>
-                <NewClient handleClient={client => this.handleClient(client)}/>
-
+                
                 <div className={styles.filter + " input-group"}>
                     <span className="input-group-btn">
                         <button className="btn btn-default" type="button" onClick={this.filterById}>Filter by Id</button>
@@ -138,7 +147,7 @@ export default class App extends React.Component {
                                         <strong>Client Details</strong>
                                         <ClientDetails clientId={client.id}/>
                                         <Orders clientId={client.id}/>
-                                        <Vouchers clientId={client.id}/>
+                                        
                                     </div>
                                 </td>
                             </tr>
@@ -146,6 +155,7 @@ export default class App extends React.Component {
                     })}
                     </tbody>
                 </table>
+                <NewClient handleClient={client => this.handleClient(client)}/>
             </div>
         );
     }

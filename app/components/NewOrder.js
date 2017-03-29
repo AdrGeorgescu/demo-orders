@@ -1,17 +1,8 @@
 import React from 'react';
 import styles from '../css/App.css';
+import config from '../../config';
 
-const endpointUrl = 'http://192.168.1.15:8080';
-
-const clientsEnpoint = endpointUrl + '/clients';
-const clientByPhoneEnpoint = clientsEnpoint + '?phone=';
-
-const shopOrdersEndpoint = endpointUrl + '/shoporders';
-const shopOrdersForClientEndpoint = shopOrdersEndpoint + '?clientId=';
-const shopOrdersForClientByPhoneEndpoint = shopOrdersEndpoint + '?clientPhone=';
-
-const vouchersEnpoint = endpointUrl + '/voucers';
-const vouchersForClientEnpoint = vouchersEnpoint + '?clientId=';
+const shopOrdersEndpoint = config.baseUrl + '/shoporders';
 
 export class NewOrder extends React.Component {
 
@@ -44,7 +35,6 @@ export class NewOrder extends React.Component {
         fetch(shopOrdersEndpoint, newOrderHeaders)
             .then((response) => {
                 response.json().then((order) => {
-                    console.log("new order created", order);
                     this.props.handleOrder(order);
                     this.resetForm();
                 });
@@ -57,9 +47,11 @@ export class NewOrder extends React.Component {
 
     render = () => {
         return (
-            <div className={styles.newOrder}>
+            <div className="input-group">
                 <input type="text" className="form-control" ref="total" placeholder="Total"/>
-                <button className="btn btn-primary" onClick={this.createNewOrder}>Save</button>
+                <span className="input-group-btn">
+                    <button className="btn btn-default" type="button" onClick={this.createNewOrder}>Add Order</button>
+                </span>
             </div>
         );
     }

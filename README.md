@@ -6,5 +6,6 @@ React Demo
 
 1. cd demo-orders
 2. npm install
-3. npm start
-4. navigate to http://localhost:3000 in your browser of choice.
+3. configure the base url in the config.json file
+4. npm start
+5. navigate to http://localhost:3000 in your browser of choice.

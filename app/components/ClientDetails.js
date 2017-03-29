@@ -1,17 +1,8 @@
 import React from 'react';
 import styles from '../css/App.css';
+import config from '../../config';
 
-let endpointUrl = "http://192.168.1.15:8080"; 
-
-let clientsEnpoint = endpointUrl + "/clients";
-let clientByPhoneEnpoint = clientsEnpoint + "?phone=";
-
-let shopOrdersEndpoint = endpointUrl + "/shoporders";
-let shopOrdersForClientEndpoint = shopOrdersEndpoint + "?clientId=";
-let shopOrdersForClientByPhoneEndpoint = shopOrdersEndpoint + "?clientPhone=";
-
-let vouchersEnpoint = endpointUrl + "/voucers";
-let vouchersForClientEnpoint = vouchersEnpoint + "?clientId=";
+let clientsEnpoint = config.baseUrl + "/clients";
 
 export class ClientDetails extends React.Component {
 

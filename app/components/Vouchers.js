@@ -2,10 +2,6 @@ import React from 'react';
 import styles from '../css/App.css';
 import {NewOrder} from './NewOrder';
 
-const endpointUrl = 'http://192.168.1.15:8080';
-const vouchersEnpoint = endpointUrl + '/vouchers';
-const vouchersForClientEnpoint = vouchersEnpoint + '?clientId=';
-
 export class Vouchers extends React.Component {
 
     /**
@@ -14,50 +10,15 @@ export class Vouchers extends React.Component {
      */
     constructor(props) {
         super(props);
-        this.state = {
-            vouchers: []
-        };
     }
 
-    componentDidMount = () => {
-        this.getClientVouchers(this.props.clientId);
-    };
-
-    getClientVouchers = (clientId) => {
-        const headers = {
-            method: "GET",
-            credentials: "include"
-        };
-
-        fetch(vouchersForClientEnpoint + clientId, headers)
-            .then((vouchers) => {
-                vouchers.json().then(json => {
-                    this.setState({vouchers: json})
-                });
-
-            });
-    };
-
-    handleVouchers = (voucher) => {
-        const newVoucher = {
-            id: voucher.id,
-            value: voucher.value,
-            code: voucher.code
-        };
-
-        const vouchers = this.state.vouchers;
-        vouchers.push(newVoucher);
-
-        this.setState({vouchers});
-    };
-
     render = () => {
-        let noVouchers = this.state.vouchers.length === 0 ? <div>No vouchers</div> : "";
+        let noVouchers = this.props.data.length === 0 ? <div>No vouchers</div> : <strong>Vouchers</strong>;
 
         return (
-            <div>
+            <div className={styles.vouchersContainer}>
                 {noVouchers}
-                {this.state.vouchers.map(voucher => {
+                {this.props.data.map(voucher => {
                     return (
                         <div key={voucher.id}>
                             <div>Code: {voucher.code}</div>
@@ -65,7 +26,6 @@ export class Vouchers extends React.Component {
                         </div>
                     );
                 })}
-                <NewOrder clientId={this.props.clientId} handleOrder={order => this.handleOrder(order)}/>
             </div>
         );
     }

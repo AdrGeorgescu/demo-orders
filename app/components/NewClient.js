@@ -1,10 +1,8 @@
 import React from 'react';
 import styles from '../css/App.css';
+import config from '../../config';
 
-const endpointUrl = 'http://192.168.1.15:8080';
-
-const clientsEnpoint = endpointUrl + '/clients';
-const clientByPhoneEnpoint = clientsEnpoint + '?phone=';
+const clientsEnpoint = config.baseUrl + '/clients';
 
 export class NewClient extends React.Component {
 
@@ -57,12 +55,15 @@ export class NewClient extends React.Component {
 
     render = () => {
         return (
-            <div className={styles.newClient}>
-                <input type="text" className="form-control" ref="fname" placeholder="First name" />
-                <input type="text" className="form-control" ref="lname" placeholder="Last name" />
-                <input type="text" className="form-control" ref="email" placeholder="Email" />
-                <input type="text" className="form-control" ref="phone" placeholder="Phone" />
-                <button className="btn btn-primary" onClick={this.createNewClient}>Save</button>
+            <div>
+                <button type="button" className={styles.newClient + " btn btn-info"} data-toggle="collapse" data-target="#addclient">Add new client</button>
+                <div className={styles.newClient + " collapse"} id="addclient">
+                    <input type="text" className="form-control" ref="fname" placeholder="First name" />
+                    <input type="text" className="form-control" ref="lname" placeholder="Last name" />
+                    <input type="text" className="form-control" ref="email" placeholder="Email" />
+                    <input type="text" className="form-control" ref="phone" placeholder="Phone" />
+                    <button className="btn btn-primary" onClick={this.createNewClient}>Save</button>
+                </div>
             </div>
         );
     }
