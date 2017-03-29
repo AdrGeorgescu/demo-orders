@@ -17,3 +17,23 @@ body {
 .idCol {
     width: 50px;
 }
+
+.newClient {
+    margin-bottom: 10px;
+}
+
+.newClient input {
+    margin: 8px 0;
+}
+
+.filter {
+    margin-bottom: 10px;
+}
+
+.clientDetails {
+    background-color: #fcf8e3;
+    padding: 8px;
+    border: 1px solid #c8c8c8;
+    border-top: 0;
+    border-bottom: 0;
+}

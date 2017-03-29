@@ -26,15 +26,16 @@ export class ClientDetails extends React.Component {
         };
     }
 
-    componentDidMount() {
-        this.getClientDetails(this.props.id);        
-    }
+    componentDidMount = () => {
+        this.getClientDetails(this.props.clientId);
+    };
 
-    getClientDetails(clientId) {
-        let headers = {
+    getClientDetails = (clientId) => {
+        const headers = {
             method: "GET",
             credentials: "include"
         };
+
         fetch(clientsEnpoint + "/" + clientId, headers)
            .then((client) => {
               client.json().then(json => {
@@ -42,9 +43,9 @@ export class ClientDetails extends React.Component {
                 });
                 
            });
-    }
+    };
 
-    render() {
+    render = () => {
         return(
             <div>     
                 <div>Email: {this.state.cDetails.email}</div>
