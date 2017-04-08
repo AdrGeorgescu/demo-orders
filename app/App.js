@@ -36,6 +36,7 @@ export default class App extends React.Component {
             .then((clients) => {
                 clients.json().then(json => {
                     this.setState({clients: json});
+
                 });
 
             });
@@ -147,7 +148,6 @@ export default class App extends React.Component {
                                         <strong>Client Details</strong>
                                         <ClientDetails clientId={client.id}/>
                                         <Orders clientId={client.id}/>
-                                        
                                     </div>
                                 </td>
                             </tr>

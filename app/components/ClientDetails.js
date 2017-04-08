@@ -18,10 +18,15 @@ export class ClientDetails extends React.Component {
     }
 
     componentDidMount = () => {
-        this.getClientDetails(this.props.clientId);
+        this.getClientDetails();
     };
 
-    getClientDetails = (clientId) => {
+    componentDidUpdate = () => {
+        this.getClientDetails();
+    };
+
+    getClientDetails = () => {
+        const clientId = this.props.clientId;
         const headers = {
             method: "GET",
             credentials: "include"

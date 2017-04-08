@@ -25,11 +25,17 @@ export class Orders extends React.Component {
     }
 
     componentDidMount = () => {
-        this.getClientOrders(this.props.clientId);
-        this.getClientVouchers(this.props.clientId);
+        this.getClientOrders();
+        this.getClientVouchers();
     };
 
-    getClientOrders = (clientId) => {
+    componentDidUpdate = () => {
+        this.getClientOrders();
+        this.getClientVouchers();
+    };
+
+    getClientOrders = () => {
+        const clientId = this.props.clientId;
         let headers = {
             method: "GET",
             credentials: "include"
@@ -44,7 +50,8 @@ export class Orders extends React.Component {
             });
     };
     
-    getClientVouchers = (clientId) => {
+    getClientVouchers = () => {
+        const clientId = this.props.clientId;
         const headers = {
             method: "GET",
             credentials: "include"
