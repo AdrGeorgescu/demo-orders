@@ -29,11 +29,6 @@ export class Orders extends React.Component {
         this.getClientVouchers();
     };
 
-    componentDidUpdate = () => {
-        this.getClientOrders();
-        this.getClientVouchers();
-    };
-
     getClientOrders = () => {
         const clientId = this.props.clientId;
         let headers = {
@@ -92,24 +87,27 @@ export class Orders extends React.Component {
     };
 
     render = () => {
-        let noOrders = this.state.orders.length === 0 ? <div>No orders</div> : <strong>Client Orders</strong>;
+        const noOrders = this.state.orders.length === 0 ? <div>No orders</div> : <strong>Client Orders</strong>;
 
         return (
             <div className={styles.ordersContainer}>
                 {noOrders}
                 {this.state.orders.map(order => {
                     return (
-                        <div key={order.id} className={styles.order}>
+                        <div key={order.id}
+                             className={styles.order}>
                             <div>Order ID: {order.id}</div>
                             <div>Total: {order.total}</div>
                         </div>
                     );
                 })}
-                <NewOrder clientId={this.props.clientId} handleOrder={order => this.handleOrder(order)}/>
+                <NewOrder clientId={this.props.clientId}
+                          handleOrder={order => this.handleOrder(order)}/>
                 <div className={styles.vouchersContainer}>
                     {this.state.vouchers.map(voucher => {
                         return (
-                            <div key={voucher.id} className={styles.order}>
+                            <div key={voucher.id}
+                                 className={styles.order}>
                                 <div>Code: {voucher.code}</div>
                                 <div>Value: {voucher.value}</div>
                             </div>
