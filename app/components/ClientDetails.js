@@ -21,10 +21,6 @@ export class ClientDetails extends React.Component {
         this.getClientDetails();
     };
 
-    componentDidUpdate = () => {
-        this.getClientDetails();
-    };
-
     getClientDetails = () => {
         const clientId = this.props.clientId;
         const headers = {
@@ -37,7 +33,6 @@ export class ClientDetails extends React.Component {
               client.json().then(json => {
                     this.setState({cDetails: json})
                 });
-                
            });
     };
 
@@ -47,7 +42,7 @@ export class ClientDetails extends React.Component {
                 <div>Email: {this.state.cDetails.email}</div>
                 <div>Phone: {this.state.cDetails.phone}</div>
                 <div>Full Name: {this.state.cDetails.firstName + " " + this.state.cDetails.lastName}</div>
-                <div>Phone: {this.state.cDetails.joinDate}</div>
+                <div>Join Date: {this.state.cDetails.joinDate}</div>
             </div>
         );
     }

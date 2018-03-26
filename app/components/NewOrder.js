@@ -48,9 +48,16 @@ export class NewOrder extends React.Component {
     render = () => {
         return (
             <div className="input-group">
-                <input type="text" className="form-control" ref="total" placeholder="Total"/>
+                <input type="text"
+                       className="form-control"
+                       ref="total"
+                       placeholder="Total"/>
                 <span className="input-group-btn">
-                    <button className="btn btn-default" type="button" onClick={this.createNewOrder}>Add Order</button>
+                    <button className="btn btn-default"
+                            type="button"
+                            onClick={this.createNewOrder}>
+                        Add Order
+                    </button>
                 </span>
             </div>
         );

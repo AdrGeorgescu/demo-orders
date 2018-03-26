@@ -13,7 +13,7 @@ export class Vouchers extends React.Component {
     }
 
     render = () => {
-        let noVouchers = this.props.data.length === 0 ? <div>No vouchers</div> : <strong>Vouchers</strong>;
+        const noVouchers = this.props.data.length === 0 ? <div>No vouchers</div> : <strong>Vouchers</strong>;
 
         return (
             <div className={styles.vouchersContainer}>
