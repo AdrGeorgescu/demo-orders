@@ -37,11 +37,9 @@ export class Orders extends React.Component {
         };
 
         fetch(shopOrdersForClientEndpoint + clientId, headers)
-            .then((client) => {
-                client.json().then(json => {
-                    this.setState({orders: json});
-                });
-
+            .then((orders) => orders.json())
+            .then((orders) => {
+                this.setState({orders});
             });
     };
     
@@ -53,10 +51,9 @@ export class Orders extends React.Component {
         };
 
         fetch(vouchersForClientEnpoint + clientId, headers)
+            .then((vouchers) => vouchers.json())
             .then((vouchers) => {
-                vouchers.json().then(json => {
-                    this.setState({vouchers: json});
-                });
+                this.setState({vouchers});
             });
     };
 

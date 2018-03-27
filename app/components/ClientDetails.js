@@ -28,11 +28,10 @@ export class ClientDetails extends React.Component {
             credentials: "include"
         };
 
-        fetch(clientsEnpoint + "/" + clientId, headers)
-           .then((client) => {
-              client.json().then(json => {
-                    this.setState({cDetails: json})
-                });
+        fetch(`${clientsEnpoint}/${clientId}`, headers)
+            .then((client) => client.json())
+            .then((client) => {
+                this.setState({cDetails: client})
            });
     };
 

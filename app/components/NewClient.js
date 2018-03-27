@@ -37,12 +37,10 @@ export class NewClient extends React.Component {
         };
 
         fetch(clientsEnpoint, newClientHeaders)
-            .then((response) => {
-                response.json().then((client) => {
-                    console.log("new client created", client);
-                    this.props.handleClient(client);
-                    this.resetForm();
-                });
+            .then((client) => client.json())
+            .then((client) => {
+                this.props.handleClient(client);
+                this.resetForm();
             });
     };
 
