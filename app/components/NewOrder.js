@@ -33,11 +33,10 @@ export class NewOrder extends React.Component {
         };
 
         fetch(shopOrdersEndpoint, newOrderHeaders)
-            .then((response) => {
-                response.json().then((order) => {
-                    this.props.handleOrder(order);
-                    this.resetForm();
-                });
+            .then((order) => order.json())
+            .then((order) => {
+                this.props.handleOrder(order);
+                this.resetForm();
             });
     };
 

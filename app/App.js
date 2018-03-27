@@ -19,7 +19,8 @@ export default class App extends React.Component {
         super(props);
         this.state = {
             clients: [],
-            clientDetails: {}
+            clientDetails: {},
+            loading: false
         };
     }
 
@@ -32,10 +33,15 @@ export default class App extends React.Component {
             method: "GET",
             credentials: "include"
         };
+        this.setState({
+            loading: true
+        });
         fetch(clientsEnpoint, headers)
+            .then((clients) => clients.json())
             .then((clients) => {
-                clients.json().then(clients => {
-                    this.setState({clients});
+                this.setState({
+                    clients,
+                    loading: false
                 });
             });
     };
@@ -62,18 +68,25 @@ export default class App extends React.Component {
             this.getClients();
             return;
         }
-        
+        this.setState({
+            clients: [],
+            loading: true
+        });
         fetch(clientsEnpoint + "/" + clientId, headers)
-            .then((clients) => {
-                clients.json().then(client => {
-                    this.setState({
-                        clients: [{
-                            id: client.id,
-                            name: client.firstName
-                        }]
-                    });
+            .then((client) => client.json())
+            .then((client) => {
+                this.setState({
+                    clients: [{
+                        id: client.id,
+                        name: client.firstName
+                    }],
+                    loading: false
                 });
 
+            }).catch(() => {
+                this.setState({
+                    loading: false
+                })
             });
     };
 
@@ -89,18 +102,24 @@ export default class App extends React.Component {
             this.getClients();
             return;
         }
-
+        this.setState({
+            clients: [],
+            loading: true
+        });
         fetch(clientByPhoneEnpoint + clientPhone, headers)
-            .then((clients) => {
-                clients.json().then(client => {
-                    this.setState({
-                        clients: [{
-                            id: client.id,
-                            name: client.firstName
-                        }]
-                    });
+            .then((client) => client.json())
+            .then((client) => {
+                this.setState({
+                    clients: [{
+                        id: client.id,
+                        name: client.firstName
+                    }],
+                    loading: false
                 });
-
+            }).catch(() => {
+                this.setState({
+                    loading: false
+                })
             });
     };
 
@@ -138,6 +157,7 @@ export default class App extends React.Component {
                     </tr>
                     </thead>
                     <tbody>
+                    {this.state.loading ? <tr><td colSpan="2">Loading...</td></tr> : false}
                     {this.state.clients.map((client) => {
                         return [
                             <tr data-toggle="collapse"
